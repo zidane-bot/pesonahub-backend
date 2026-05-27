@@ -95,27 +95,40 @@ def setup_database():
                 except Exception:
                     pass
 
+            # Truncate templates and categories to sync with frontend formats
+            conn.execute(text("TRUNCATE TABLE templates, categories CASCADE"))
+
             # Seed categories
-            count = conn.execute(text("SELECT COUNT(*) FROM categories")).scalar()
-            if count == 0:
-                conn.execute(text("""
-                    INSERT INTO categories (category_name)
-                    VALUES ('Kuliner'), ('Fashion'), ('Kerajinan'), ('Jasa'), ('Umum')
-                """))
+            conn.execute(text("""
+                INSERT INTO categories (category_name)
+                VALUES 
+                ('Instagram Feed'), 
+                ('Poster Promo'), 
+                ('Katalog Produk'), 
+                ('Template Livestream'), 
+                ('Banner Marketplace')
+            """))
 
             # Seed templates
-            tcount = conn.execute(text("SELECT COUNT(*) FROM templates")).scalar()
-            if tcount == 0:
-                conn.execute(text("""
-                    INSERT INTO templates (category_id, title, preview_image_url, canvas_data)
-                    VALUES 
-                    (1, 'Promo Makanan Segar',
-                     'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?q=80&w=400&auto=format&fit=crop',
-                     '{"teks_utama":"Promo Spesial!","slogan":"Hanya Hari Ini!","warna_bg":"#F59E0B","warna_teks":"#0B1B3D"}'),
-                    (1, 'Paket Hemat Ayam Geprek',
-                     'https://images.unsplash.com/photo-1626074353765-517a681e40be?q=80&w=400&auto=format&fit=crop',
-                     '{"teks_utama":"Ayam Geprek Mercon","slogan":"Cuma Rp 15.000,-","warna_bg":"#FFB703","warna_teks":"#023047"}')
-                """))
+            conn.execute(text("""
+                INSERT INTO templates (category_id, title, preview_image_url, canvas_data)
+                VALUES 
+                (1, 'Promo Diskon Kripik Nusantara',
+                 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?q=80&w=400',
+                 '{"warna_bg": "#F59E0B", "teks_utama": "Potongan 50%", "sub_teks": "Keripik singkong renyah tanpa bahan pengawet.", "brand_teks": "KRIPIK NUSANTARA"}'),
+                (2, 'Poster Menu Ayam Bakar',
+                 'https://asset.kompas.com/crops/N8WTCiVClutwEkjIgCykYbt1e2Q=/142x72:863x553/1200x800/data/photo/2022/09/27/633297e88244b.jpg',
+                 '{"warna_bg": "#0B1B3D", "teks_utama": "Diskon Ayam Bakar", "sub_teks": "Ayam bakar rempah madu lezat meresap sampai ke tulang.", "brand_teks": "AYAM BAKAR PREMAN"}'),
+                (4, 'Livestream Overlay Fashion',
+                 'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=400',
+                 '{"warna_bg": "#FFFFFF", "teks_utama": "Flash Sale", "sub_teks": "Model terbaru baju lebaran kekinian diskon akhir pekan.", "brand_teks": "FASHION HUB"}'),
+                (3, 'Katalog Hijab Syari Modern',
+                 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400',
+                 '{"warna_bg": "#F8FAFC", "teks_utama": "Hijab Syari Premium", "sub_teks": "Bahan adem premium, jahitan rapi, tersedia banyak warna.", "brand_teks": "HIJAB SYARI"}'),
+                (5, 'Banner Toko Shopee Fashion',
+                 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=400',
+                 '{"warna_bg": "#0B1B3D", "teks_utama": "Fashion Diskon 70%", "sub_teks": "Koleksi busana muslim modern paling trendi masa kini.", "brand_teks": "TOKO UTAMA"}')
+            """))
 
         return {"status": "success", "pesan": "Semua tabel berhasil dibuat/diverifikasi di Neon Cloud!"}
     except Exception as e:
