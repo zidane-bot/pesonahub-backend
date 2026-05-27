@@ -95,6 +95,14 @@ def setup_database():
                 except Exception:
                     pass
 
+            # Drop foreign key constraint on template_id to allow custom template_id=0 (blank design)
+            try:
+                conn.execute(text(
+                    "ALTER TABLE user_designs DROP CONSTRAINT IF EXISTS user_designs_template_id_fkey"
+                ))
+            except Exception:
+                pass
+
             # Truncate templates and categories to sync with frontend formats
             conn.execute(text("TRUNCATE TABLE templates, categories CASCADE"))
 
