@@ -144,7 +144,10 @@ def setup_database():
                  '{"warna_bg": "#D4A373", "teks_utama": "Koleksi Terpopuler", "sub_teks": "Busana syari elegan untuk menunjang aktivitas harian Anda.", "brand_teks": "FASHION HUB"}'),
                 ((SELECT category_id FROM categories WHERE category_name = 'Katalog Produk' LIMIT 1), 'Katalog Kaos Distro Pria',
                  'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=400',
-                 '{"warna_bg": "#1D3557", "teks_utama": "Kaos Cotton 30s", "sub_teks": "Bahan katun adem, menyerap keringat, sablon plastisol awet.", "brand_teks": "FASHION HUB"}')
+                 '{"warna_bg": "#1D3557", "teks_utama": "Kaos Cotton 30s", "sub_teks": "Bahan katun adem, menyerap keringat, sablon plastisol awet.", "brand_teks": "FASHION HUB"}'),
+                ((SELECT category_id FROM categories WHERE category_name = 'Poster Promo' LIMIT 1), 'Merah dan Putih Elegan Acara Spesial Kebaya Nasional Poster',
+                 'kebaya_template.png',
+                 '{"warna_bg": "#7A0C16", "teks_utama": "Hari Kebaya Nasional", "sub_teks": "Anggun dalam Tradisi, Percaya Diri dalam Jati Diri!", "brand_teks": "FASHION SHOW"}')
             """))
 
         return {"status": "success", "pesan": "Semua tabel berhasil dibuat/diverifikasi di Neon Cloud!"}
