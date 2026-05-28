@@ -304,7 +304,7 @@ def update_template(template_id: int, req: SaveTemplateRequest):
 # ======================================================
 class DesignInput(BaseModel):
     user_id: int
-    template_id: int
+    template_id: int | None = None
     title: str
     design_data: dict
     nama_produk: str | None = None
