@@ -104,7 +104,7 @@ def setup_database():
                 pass
 
             # Truncate templates and categories to sync with frontend formats
-            conn.execute(text("TRUNCATE TABLE templates, categories CASCADE"))
+            conn.execute(text("TRUNCATE TABLE templates, categories RESTART IDENTITY CASCADE"))
 
             # Seed categories
             conn.execute(text("""
@@ -135,7 +135,16 @@ def setup_database():
                  '{"warna_bg": "#F8FAFC", "teks_utama": "Hijab Syari Premium", "sub_teks": "Bahan adem premium, jahitan rapi, tersedia banyak warna.", "brand_teks": "HIJAB SYARI"}'),
                 (5, 'Banner Toko Shopee Fashion',
                  'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=400',
-                 '{"warna_bg": "#0B1B3D", "teks_utama": "Fashion Diskon 70%", "sub_teks": "Koleksi busana muslim modern paling trendi masa kini.", "brand_teks": "TOKO UTAMA"}')
+                 '{"warna_bg": "#0B1B3D", "teks_utama": "Fashion Diskon 70%", "sub_teks": "Koleksi busana muslim modern paling trendi masa kini.", "brand_teks": "TOKO UTAMA"}'),
+                (1, 'Menu Kopi Susu Senja',
+                 'https://images.unsplash.com/photo-1559525839-b184a4d698c7?q=80&w=400',
+                 '{"warna_bg": "#283618", "teks_utama": "Beli 1 Gratis 1", "sub_teks": "Nikmati kesegaran es kopi susu gula aren buatan barista lokal.", "brand_teks": "KOPI SENJA"}'),
+                (2, 'Promo Hijab Muslimah',
+                 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=400',
+                 '{"warna_bg": "#D4A373", "teks_utama": "Koleksi Terpopuler", "sub_teks": "Busana syari elegan untuk menunjang aktivitas harian Anda.", "brand_teks": "FASHION HUB"}'),
+                (3, 'Katalog Kaos Distro Pria',
+                 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=400',
+                 '{"warna_bg": "#1D3557", "teks_utama": "Kaos Cotton 30s", "sub_teks": "Bahan katun adem, menyerap keringat, sablon plastisol awet.", "brand_teks": "FASHION HUB"}')
             """))
 
         return {"status": "success", "pesan": "Semua tabel berhasil dibuat/diverifikasi di Neon Cloud!"}
